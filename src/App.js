@@ -6,6 +6,8 @@ function App() {
   const [formData, setFormData] = useState({ name: "", email: "" });
   const [recordData, setRecordData] = useState([]);
 
+  console.log("process.env.REACT_APP_NODE_ENV:" + process.env.REACT_APP_NODE_ENV);
+  console.log("process.env.REACT_APP_SERVER_BASE_URL:" + process.env.REACT_APP_SERVER_BASE_URL);
   const base_url = process.env.REACT_APP_NODE_ENV === 'development' ? process.env.REACT_APP_LOCAL_BASE_URL : process.env.REACT_APP_SERVER_BASE_URL;
 
   useEffect(() => {
