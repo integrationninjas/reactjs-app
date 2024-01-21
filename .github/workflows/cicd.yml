@@ -9,26 +9,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Use the secret in a step
-        run: |
-          REACT_APP_SERVER_BASE_URL='${{ vars.REACT_APP_SERVER_BASE_URL }}'
-          echo "Using URL: $REACT_APP_SERVER_BASE_URL"
-  #     - name: Checkout Source
-  #       uses: actions/checkout@v3
-  #     - name: Login to Docker Hub
-  #       run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-  #     - name: Build Docker Image
-  #       run: docker build -t integrationninjas/reactjs-app .
-  #     - name: Publish image to docker hub
-  #       run: docker push integrationninjas/reactjs-app:latest   
+      - name: Checkout Source
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker Image
+        run: docker build -t integrationninjas/reactjs-app .
+      - name: Publish image to docker hub
+        run: docker push integrationninjas/reactjs-app:latest   
 
-  # deploy: 
-  #   needs: build
-  #   runs-on: self-hosted
-  #   steps:
-  #     - name: Pull image from docker hub
-  #       run: docker pull integrationninjas/reactjs-app:latest 
-  #     - name: Delete Old Container
-  #       run: docker rm -f reactContainer
-  #     - name: Run docker container
-  #       run: docker run -d -p 3000:80 --name reactContainer -e REACT_APP_NODE_ENV='production' -e REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}' integrationninjas/reactjs-app
+  deploy: 
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull integrationninjas/reactjs-app:latest 
+      - name: Delete Old Container
+        run: docker rm -f reactContainer
+      - name: Run docker container
+        run: docker run -d -p 3000:80 --name reactContainer -e REACT_APP_NODE_ENV='production' -e REACT_APP_SERVER_BASE_URL='${{ vars.REACT_APP_SERVER_BASE_URL }}' integrationninjas/reactjs-app
