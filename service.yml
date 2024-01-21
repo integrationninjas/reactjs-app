@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: reactjs-app
+  labels:
+    app: reactjs-app
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+  externalIPs:
+  - 192.168.68.67
+  selector:
+    app: reactjs-app
