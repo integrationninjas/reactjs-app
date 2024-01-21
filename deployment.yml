@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: reactjs-app
+  labels:
+    app: reactjs-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: reactjs-app
+  template:
+    metadata:
+      labels:
+        app: reactjs-app
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: reactjs-app
+        image: rameshkumarverma/reactjs-app:latest
+        imagePullPolicy: "Always"
+        ports:
+        - containerPort: 80
