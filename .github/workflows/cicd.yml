@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Use the secret in a step
         run: |
-          REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}'
+          REACT_APP_SERVER_BASE_URL='${{ vars.REACT_APP_SERVER_BASE_URL }}'
           echo "Using URL: $REACT_APP_SERVER_BASE_URL"
   #     - name: Checkout Source
   #       uses: actions/checkout@v3
