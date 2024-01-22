@@ -1,8 +1,12 @@
 FROM node:alpine3.18 as build
 
+# Declare build-time environment variables
+ARG REACT_APP_NODE_ENV
+ARG REACT_APP_SERVER_BASE_URL
+
 # Set default values for environment variables
-# ENV REACT_APP_NODE_ENV=production
-# ENV REACT_APP_SERVER_BASE_URL=http://00.000.000.00:0000
+ENV REACT_APP_NODE_ENV=$REACT_APP_NODE_ENV
+ENV REACT_APP_SERVER_BASE_URL=$REACT_APP_SERVER_BASE_URL
 
 # Build App
 WORKDIR /app 
