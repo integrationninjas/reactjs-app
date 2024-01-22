@@ -27,4 +27,4 @@ jobs:
       - name: Delete Old Container
         run: docker rm -f reactContainer
       - name: Run docker container
-        run: docker run -d -p 3000:80 --name reactContainer -e REACT_APP_NODE_ENV='production' -e REACT_APP_SERVER_BASE_URL='http://16.171.168.80:4000' integrationninjas/reactjs-app
+        run: docker run -d -p 3000:80 --name reactContainer -e REACT_APP_NODE_ENV="production" -e REACT_APP_SERVER_BASE_URL="http://16.171.168.80:4000" integrationninjas/reactjs-app
