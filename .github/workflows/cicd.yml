@@ -1,30 +1,35 @@
 name: CICD
+
 on:
   push:
     branches:
-    - deploy-to-ec2
+      - deploy-to-ec2
 
-
-jobs
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source 
         uses: actions/checkout@v3
-        - name: Login to Docker Hub
-          run: docker login -u ${{secrets.DOCKER_USERNAME }} -p ${{secrets.DOCKER_PASSWORD }}
-        - name: Build Docker Image 
-          run: docker build -t integrationninjasreactjs-app .
-        -name: Publish image to docker hub
-          run: docker push integrationninjasreactjs-app:latest
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker Image 
+        run: docker build -t integrationninjas/reactjs-app .
+
+      - name: Publish image to docker hub
+        run: docker push integrationninjas/reactjs-app:latest
 
 deploy:
   needs: build
-  runs-on: aws-ec2
+  runs-on: aws-ec2 # Ändern Sie dies in eine gültige Runner-Umgebung
   steps:
-  -name: Pull image from docker hub
-   run:docker pull integrationninjasreactjs-app:latest
-  - name: Delete Old Container 
-    run: docker rm -f reactContainer
-  - name: Run docker container 
-    run: docker run -d -p 3000:80 --name reactContainer integrationninjasreactjs-app
+    - name: Pull image from docker hub
+      run: docker pull integrationninjas/reactjs-app:latest
+
+    - name: Delete Old Container 
+      run: docker rm -f reactContainer
+
+    - name: Run docker container 
+      run: docker run -d -p 3000:80 --name reactContainer integrationninjas/reactjs-app
