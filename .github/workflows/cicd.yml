@@ -2,7 +2,7 @@ name: CICD
 on:
   push:
     branches:
-    -deploy-to-ec2
+    - deploy-to-ec2
 
 
 jobs
@@ -24,7 +24,7 @@ deploy:
   steps:
   -name: Pull image from docker hub
    run:docker pull integrationninjasreactjs-app:latest
-  -name: Delete Old Container 
+  - name: Delete Old Container 
     run: docker rm -f reactContainer
-  -name: Run docker container 
+  - name: Run docker container 
     run: docker run -d -p 3000:80 --name reactContainer integrationninjasreactjs-app
