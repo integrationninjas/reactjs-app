@@ -14,7 +14,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}     
       - name: Build Docker Image
-        run: docker build -t integrationninjas/reactjs-app --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}'  .
+        run: docker build -t kunal1522/reactjs-app --build-arg REACT_APP_NODE_ENV='production' --build-arg REACT_APP_SERVER_BASE_URL='${{ secrets.REACT_APP_SERVER_BASE_URL }}'  .
       - name: Publish Image to docker hub
         run: docker push integrationninjas/reactjs-app:latest 
  
@@ -23,8 +23,8 @@ jobs:
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull integrationninjas/reactjs-app:latest 
+        run: docker pull kunal1522/reactjs-app:latest 
       - name: Delete old container
         run: docker rm -f reactjs-app-container
       - name: Run Docker Container
-        run: docker run -d -p 3000:80 --name reactjs-app-container integrationninjas/reactjs-app
+       run: docker run -d -p 3000:80 --name reactjs-app-container kunal1522/reactjs-app
