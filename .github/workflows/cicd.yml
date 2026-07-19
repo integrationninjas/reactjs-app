@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on: 
   push:
-    branches: [ deploy-to-gh-pages ]
+    branches: [ master ]
 
 permissions:
   contents: read  
